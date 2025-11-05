@@ -1,0 +1,27 @@
+services:
+  db:
+    image: postgres:15
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+
+  catalogo_api:
+    depends_on:
+      - db
+  usuarios_api:
+    depends_on:
+      - db
+  carrinho_api:
+    depends_on:
+      - db
+  catalogo_migrator:
+    depends_on:
+      - db
+
+volumes:
+  postgres-data:
