@@ -1,0 +1,3 @@
+# Força o Git a usar LF (padrão Linux) nos commits
+# e deixa o sistema operacional (Windows) usar CRLF localmente.
+* text=auto eol=lf
