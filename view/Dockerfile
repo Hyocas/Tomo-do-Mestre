@@ -1,6 +1,12 @@
-FROM nginx:stable-alpine
+FROM node:18-alpine AS builder
+WORKDIR /app
+COPY package.json ./
+RUN npm install
+COPY . .
+RUN npm run build
 
-RUN echo '<html><body><h1>Nginx está funcionando!</h1></body></html>' > /usr/share/nginx/html/index.html
+FROM nginx:stable-alpine
+COPY --from=builder /app/dist /usr/share/nginx/html
 
 EXPOSE 80
 CMD ["nginx", "-g", "daemon off;"]
