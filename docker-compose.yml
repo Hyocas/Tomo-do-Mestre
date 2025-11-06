@@ -1,4 +1,5 @@
 services:
+  ### frontend ###
 
   ### Backend ###
   usuarios_api:
@@ -12,3 +13,29 @@ services:
       POSTGRES_DB: ${POSTGRES_DB}
       JWT_SECRET: ${JWT_SECRET}
       DB_SSL: ${DB_SSL}
+
+  campanhas_api:
+    build: ./controller/campanhas
+    ports:
+      - "3001:3000"
+    environment:
+      DB_HOST: ${DB_HOST}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+      JWT_SECRET: ${JWT_SECRET}
+      DB_SSL: ${DB_SSL}
+      USUARIOS_API_URL: http://usuarios_api:3000
+
+  ### ferramentas ###
+  all_migrator:
+    build: ./services/migrator
+    profiles: ["tools"]
+    environment:
+      DB_HOST: ${DB_HOST}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+      DB_SSL: ${DB_SSL}
+    command: ["npm", "run", "migrate:up"]
+      

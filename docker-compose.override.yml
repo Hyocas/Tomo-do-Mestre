@@ -10,16 +10,14 @@ services:
     volumes:
       - postgres-data:/var/lib/postgresql/data
 
-  catalogo_api:
-    depends_on:
-      - db
   usuarios_api:
     depends_on:
       - db
-  carrinho_api:
+  campanhas_api:
     depends_on:
       - db
-  catalogo_migrator:
+  migrator:
+    profiles: ["tools"]
     depends_on:
       - db
 
