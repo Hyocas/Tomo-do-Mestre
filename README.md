@@ -1,4 +1,4 @@
-# Tome do Mestre - Projeto de Engenharia de Software
+# Tomo do Mestre - Projeto de Engenharia de Software
 
 ## Descrição
 
